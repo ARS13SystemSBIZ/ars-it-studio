@@ -1,0 +1,117 @@
+/* Базовые настройки для эко-стиля */
+body {
+    background-image: url('https://images.unsplash.com/photo-1705591936362-aaaab3083cbe?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+    background-size: cover;
+    background-position: center; /* Заглушка, пока нет фоновой картинки */
+    background-attachment: fixed;
+    color: #2c3e2b;           /* Темно-зеленый глубокий цвет для текста */
+    font-family: 'Georgia', serif; /* Благородный классический шрифт */
+    margin: 0;
+    padding: 0;
+}   
+
+/* Главный большой баннер (Hero Section) */
+.hero {
+    color: #ffffff;
+    text-align: center;
+    padding: 100px 20px;
+    background: rgba(0, 0, 0, 0.3); /* Легкое затемнение, чтобы белый текст читался идеально */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin: 0 0 15px 0;
+    font-weight: normal;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    margin: 0 0 30px 0;
+    font-style: italic;
+    color: #e2ede2;
+}
+
+/* Общий контейнер для контента */
+.content-box {
+    max-width: 1100px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.5rem;             /* Уменьшили размер букв до аккуратного */
+    letter-spacing: 2px;           /* Добавили дорогой премиальный отступ между буквами */
+    margin: 50px auto 30px auto;   /* Уменьшили отступы вокруг плашки */
+    font-weight: normal;
+    color: #3b533b;
+    background: rgba(255, 255, 255, 0.85); /* Сделали подложку чуть более прозрачной и легкой */
+    padding: 8px 24px;             /* Уменьшили внутренние поля, сделав рамку узкой */
+    border-radius: 4px;            /* Сделали закругления углов более строгими */
+    display: table;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Сетка для карточек услуг */
+.services-grid {
+    display: flex;
+    gap: 30px;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Чтобы на телефонах карточки вставали друг под друга */
+}
+
+/* Премиальные белые карточки */
+.card {
+    background: rgba(44, 62, 43, 0.8); /* Премиальный глубокий зелёный с прозрачностью */
+    color: #ffffff;                    /* Весь обычный текст в карточке стал белым */
+    flex: 1;
+    min-width: 280px;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Сделали тень чуть глубже для объёма */
+    border-top: 4px solid #8ebd8e;     /* Заменили полоску на нежно-зелёную, чтобы она сияла */
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Карточка плавно приподнимается */
+}
+
+.card h3 {
+    margin-top: 0;
+    font-weight: normal;
+    color: #8ebd8e; /* Красивый светлый эко-оттенок для заголовков услуг */
+}
+
+.card p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #e2ede2; /* Светлый приятный цвет текста */
+}
+
+/* Благородная зеленая кнопка */
+.btn-green {
+     display: inline-block;
+    background-color: rgba(90, 125, 90, 0.25); /* Тонкий прозрачный фон */
+    border: 2px solid #8ebd8e;                 /* Стильная тонкая зелёная рамка */
+    color: #ffffff;
+    padding: 12px 28px;                        /* Уменьшили размеры, сделав её аккуратнее */
+    text-decoration: none;
+    font-size: 1rem;
+    border-radius: 4px;
+    backdrop-filter: blur(5px);                /* Эффект дорогого матового стекла */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Эффект при наведении на прозрачную кнопку */
+.btn-green:hover {
+    background-color: rgba(142, 189, 142, 0.4); /* При наведении становится чуть ярче */
+    box-shadow: 0 6px 20px rgba(142, 189, 142, 0.3);
+    transform: translateY(-2px);
+}
+
+.btn-green:hover {
+    background-color: #3b533b;
+    box-shadow: 0 6px 15px rgba(59, 83, 59, 0.5);
+}

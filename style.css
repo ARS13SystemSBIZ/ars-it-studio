@@ -1,0 +1,88 @@
+/* Общие настройки для всего экрана */
+body {
+    background-color: #1e1e24; /* Премиальный глубокий тёмный фон */
+    color: #f4f4f9;           /* Мягкий белый цвет для текста */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Стиль для главной шапки (Header) */
+.header {
+    text-align: center;
+    background: linear-gradient(135deg, #2a2a35, #121214);
+    width: 100%;
+    padding: 40px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    box-sizing: border-box;
+}
+
+.header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px 0;
+    color: #4fc3f7; /* Красивый неоново-голубой цвет */
+}
+
+.header p {
+    font-size: 1.1rem;
+    color: #b0bec5;
+    margin: 0;
+}
+
+/* Контейнер для карточки */
+.container {
+    max-width: 800px;
+    width: 90%;
+    margin: 40px 0;
+}
+
+/* Стиль карточки "Обо мне" */
+.bio-card {
+    background-color: #262630;
+    padding: 30px;
+    border-radius: 12px; /* Модные закруглённые углы */
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    border-left: 5px solid #4fc3f7; /* Стильная полоса слева */
+}
+
+.bio-card h2 {
+    margin-top: 0;
+    color: #4fc3f7;
+}
+
+.bio-card p {
+    line-height: 1.6; /* Комфортное расстояние между строками */
+    color: #e0e0e0;
+}
+
+/* Блок с кнопкой */
+.cta-box {
+    text-align: center;
+    margin-top: 40px;
+}
+
+/* Эффектная неоновая кнопка запуска бота */
+.btn {
+    display: inline-block;
+    background-color: #4fc3f7;
+    color: #1e1e24;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none; /* Убираем нижнее подчеркивание */
+    border-radius: 30px;   /* Овальная кнопка */
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.4);
+    transition: all 0.3s ease; /* Плавная анимация */
+}
+
+/* Анимация при наведении мышки на кнопку */
+.btn:hover {
+    background-color: #1e1e24;
+    color: #4fc3f7;
+    border: 2px solid #4fc3f7;
+    box-shadow: 0 6px 25px rgba(79, 195, 247, 0.7);
+    transform: translateY(-3px); /* Кнопка слегка приподнимается */
+}
