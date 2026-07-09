@@ -258,11 +258,23 @@ def get_phone(message):
         f"💰 *Итоговый чек:* ${state['calculated_price']:.2f}\n"
         f"📊 *Новый баланс штампов:* {state['new_stamps']} чаш."
     )
-    bot.send_message(YOUR_CHAT_ID, kitchen_message, parse_mode="Markdown")
-    
-    new_stamps_view = "🔴" * state['new_stamps'] + "⚪" * (5 - state['new_stamps'])
-    bot.send_message(chat_id, f"🎉 *Заказ успешно передан бариста!*\n\n• Итого к оплате: *${state['calculated_price']:.2f}*\n• Формат получения: _{state['address']}_\n\n🎁 *Ваш статус лояльности:* {new_stamps_view}\n\nСпасибо за заказ! Ваши напитки уже начали готовить! ☕✨", parse_mode="Markdown")
+    # Проверка режима работы кофейни (с 08:00 до 22:00)
+    import datetime
+    current_hour = datetime.datetime.now().hour
+
+    # Формируем сообщение для администратора/бариста
+    bot.send_message(YOUR_CHAT_ID, lead_message, parse_mode="Markdown")
+
+    # Логика ответа клиенту в зависимости от времени
+    if 8 <= current_hour < 22:
+        # Рабочее время
+        bot.send_message(chat_id, f"☕️ *Заказ успешно передан бариста!*\n\n• Итого к оплате: *${state['calculated_price']}*\n\nПриготовим за 10 минут! 🎉")
+    else:
+        # Ночное время
+        bot.send_message(chat_id, f"🌙 *Наша кофейня сейчас закрыта* (работаем с 08:00 до 22:00).\n\nНо мы зафиксировали ваш заказ на сумму *${state['calculated_price']}* в системе! Администратор свяжется с вами сразу же утром, чтобы подтвердить удобное время выдачи. Спасибо! ☕️")
+
     del user_states[chat_id]
+
 
 print("Финальный ультимативный бот кофейни запущен!")
 # Автоматическая настройка синего меню команд для кофейни
