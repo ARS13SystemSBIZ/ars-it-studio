@@ -44,12 +44,12 @@ def callback_handler(call):
     if data == "main_portfolio":
         markup = types.InlineKeyboardMarkup(row_width=1)
         markup.add(
-            types.InlineKeyboardButton("☕ Кейс: Бот-Кофейня 'Coffee Express'", url="https://telegram.me/ars_coffee_demo_bot"),
+            types.InlineKeyboardButton("☕ Кейс: Бот-Кофейня 'Coffee Express'", url="https://t.me"),
             types.InlineKeyboardButton("🧮 Кейс: Интерактивный калькулятор", callback_data="case_calc"),
             types.InlineKeyboardButton("🖥️ Кейс: Личный сайт-визитка", callback_data="case_site"),
             types.InlineKeyboardButton("🌿 Кейс: Сайт 'Green Luxury'", callback_data="case_landscape"),
             types.InlineKeyboardButton("⭐️ Отзывы и Гарантии студии", callback_data="case_reviews"),
-            types.InlineKeyboardButton("💬 Связаться с Арсением напрямую", url="https://t.me/ARider13"),
+            types.InlineKeyboardButton("💬 Связаться с Арсением напрямую", url="https://t.me"),
             types.InlineKeyboardButton("🔙 Вернуться в главное меню", callback_data="back_to_main")
         )
         bot.edit_message_text("💼 *Портфолио IT-студии Арсения*\n\nНиже представлены наши готовые решения для автоматизации бизнеса и лидогенерации. Нажмите на любой кейс, чтобы изучить его детально или протестировать:", chat_id, call.message.message_id, parse_mode="Markdown", reply_markup=markup)
@@ -127,25 +127,32 @@ def handle_calculator_steps(chat_id, data, message_id):
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton("⚡ Простой (Базовый)", callback_data="level_easy"), 
                    types.InlineKeyboardButton("🔥 Сложный (С интеграциями)", callback_data="level_hard"))
-        bot.send_message(chat_id, "Какая сложность and функционал планируются?", reply_markup=markup)
+        bot.send_message(chat_id, "Какая сложность и функционал планируются?", reply_markup=markup)
 
     elif data in ["level_easy", "level_hard"]:
         user_data[chat_id]['price_steps']['level'] = data
         level_text = "Простой (Базовый) ⚡" if data == "level_easy" else "Сложный (С интеграциями) 🔥"
-        bot.edit_message_text(f"Какая сложность and функционал планируются?\n↳ *Выбрано:* {level_text}", chat_id, message_id, parse_mode="Markdown")
+        bot.edit_message_text(f"Какая сложность и функционал планируются?\n↳ *Выбрано:* {level_text}", chat_id, message_id, parse_mode="Markdown")
         
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton("✅ Да, нужно", callback_data="addon_yes"), 
                    types.InlineKeyboardButton("❌ Нет, спасибо", callback_data="addon_no"))
-        bot.send_message(chat_id, "Требуется ли индивидуальный дизайн and маркетинговая настройка?", reply_markup=markup)
+        bot.send_message(chat_id, "Требуется ли индивидуальный дизайн и маркетинговая настройка?", reply_markup=markup)
 
     elif data in ["addon_yes", "addon_no"]:
         user_data[chat_id]['price_steps']['addon'] = data
         addon_text = "Да, нужно индивидуальный дизайн ✅" if data == "addon_yes" else "Нет, спасибо ❌"
-        bot.edit_message_text(f"Требуется ли индивидуальный дизайн and маркетинговая настройка?\n↳ *Выбрано:* {addon_text}", chat_id, message_id, parse_mode="Markdown")
+        bot.edit_message_text(f"Требуется ли индивидуальный дизайн и маркетинговая настройка?\n↳ *Выбрано:* {addon_text}", chat_id, message_id, parse_mode="Markdown")
         
         steps = user_data[chat_id]['price_steps']
         total_price = PRICES[steps['type']] + PRICES[steps['level']] + PRICES[steps['addon']]
+        
+        # Автоматический расчет скидки за сложный проект
+        discount = 0
+        if steps['level'] == "level_hard":
+            discount = 50
+            total_price -= discount
+            
         user_data[chat_id]['calculated_price'] = total_price
         
         type_conf = "Веб-сайт" if steps['type'] == "type_site" else "Чат-бот"
@@ -153,9 +160,22 @@ def handle_calculator_steps(chat_id, data, message_id):
         addon_conf = "С дизайном" if steps['addon'] == "addon_yes" else "Без дизайна"
         user_data[chat_id]['config_text'] = f"{type_conf} ({level_conf}, {addon_conf})"
         
+        # Формируем красивый текст чека с уведомлением о скидке
+        result_text = (
+            f"📊 *Расчет стоимости готов!*\n\n"
+            f"• Тип проекта: {type_conf}\n"
+            f"• Сложность: {level_conf}\n"
+            f"• Опции: {addon_conf}\n\n"
+        )
+        
+        if discount > 0:
+            result_text += f"🔥 *Вам доступна скидка за сложность:* -${discount}\n\n"
+            
+        result_text += f"💰 Итоговая стоимость: *${total_price}*\n\nВы можете забронировать эту стоимость прямо сейчас. Нажмите кнопку ниже 👇"
+        
         markup = types.InlineKeyboardMarkup()
         markup.row(types.InlineKeyboardButton("🚀 Оформить заказ по этой цене", callback_data="start_order"))
-        bot.send_message(chat_id, f"📊 *Расчет стоимости готов!*\n\n• Тип: {type_conf}\n• Сложность: {level_conf}\n• Опции: {addon_conf}\n\n💰 Ориентировочная стоимость: *${total_price}*\n\nВы можете забронировать эту стоимость прямо сейчас. Нажмите кнопку ниже 👇", parse_mode="Markdown", reply_markup=markup)
+        bot.send_message(chat_id, result_text, parse_mode="Markdown", reply_markup=markup)
 
     elif data == "start_order":
         user_data[chat_id]['mode'] = 'order'
@@ -209,14 +229,14 @@ def get_client_task(message):
         f"📋 *Комментарий:* {comment}"
     )
     bot.send_message(YOUR_CHAT_ID, lead_message, parse_mode="Markdown")
-    bot.send_message(chat_id, f"Спасибо! Ваша конфигурация на сумму *${final_price}* and контакты успешно переданы. Арсений свяжется с вами в течение 15 минут! 🤝", parse_mode="Markdown")
+    bot.send_message(chat_id, f"Спасибо! Ваша конфигурация на сумму *${final_price}* и контакты успешно переданы. Арсений свяжется с вами в течение 15 минут! 🤝", parse_mode="Markdown")
     del user_data[chat_id]
 
-print("Генеральный ИТ-бот студии с разделом Портфолио запущен!")
 # Автоматическая настройка синего меню команд в левом нижнем углу
 bot.set_my_commands([
     types.BotCommand("start", "🚀 Запустить главное меню студии"),
     types.BotCommand("help", "🎯 Связаться со службой поддержки")
 ])
 
+print("Генеральный ИТ-бот студии с разделом Портфолио запущен!")
 bot.infinity_polling()

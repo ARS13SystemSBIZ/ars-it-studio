@@ -265,4 +265,10 @@ def get_phone(message):
     del user_states[chat_id]
 
 print("Финальный ультимативный бот кофейни запущен!")
+# Автоматическая настройка синего меню команд для кофейни
+bot.set_my_commands([
+    types.BotCommand("start", "☕️ Перезапустить меню кофейни"),
+    types.BotCommand("help", "📞 Связь с администратором студии")
+])
+
 bot.infinity_polling()
