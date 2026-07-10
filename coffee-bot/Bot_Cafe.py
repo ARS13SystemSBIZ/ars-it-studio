@@ -1,7 +1,12 @@
+import os
 import telebot
 from telebot import types
+from flask import Flask, request
+from dotenv import load_dotenv
 
-TOKEN = '8900991692:AAEsQf-RgUicx-V7_iRvSieo1LsNg89sw10'
+# Читаем секретный токен из .env файла
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
 YOUR_CHAT_ID = 6240010880  
 
 bot = telebot.TeleBot(TOKEN)
@@ -284,12 +289,38 @@ def get_phone(message):
     user_states[chat_id]['stamps'] = state['new_stamps']
     user_states[chat_id]['cart'] = []
 
-print("Финальный ультимативный бот кофейни запущен!")
+server = Flask(__name__)
 
-# Автоматическая настройка синего меню команд для кофейни в интерфейсе ТГ
-bot.set_my_commands([
-    types.BotCommand("start", "☕️ Перезапустить меню кофейни"),
-    types.BotCommand("help", "📞 Связь с администратором студии")
-])
+# ================= WEBHOOK (для сервера) =================
+@server.route("/webhook", methods=["POST"])
+def webhook():
+    if request.headers.get("content-type") == "application/json":
+        json_string = request.get_data().decode("utf-8")
+        update = types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return "ok", 200
+    return "error", 400
 
-bot.infinity_polling()
+@server.route('/')
+def home():
+    return "Coffee bot is alive!", 200
+
+if __name__ == "__main__":
+    print("☕ Бот кофейни Coffee Express запущен!")
+
+    bot.set_my_commands([
+        types.BotCommand("start", "☕️ Перезапустить меню кофейни"),
+        types.BotCommand("help", "📞 Связь с администратором студии")
+    ])
+
+    WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+
+    if WEBHOOK_URL:
+        print(f"🚀 Coffee Express через Webhook: {WEBHOOK_URL}")
+        bot.remove_webhook()
+        bot.set_webhook(url=WEBHOOK_URL)
+        port = int(os.environ.get("PORT", 5000))
+        server.run(host="0.0.0.0", port=port)
+    else:
+        print("🔄 Локальный polling режим")
+        bot.infinity_polling()
