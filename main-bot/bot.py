@@ -279,7 +279,9 @@ if __name__ == "__main__":
         print(f"🚀 Бот запущен через Webhook: {WEBHOOK_URL}")
         bot.remove_webhook()
         bot.set_webhook(url=WEBHOOK_URL)
-        server.run(host="0.0.0.0", port=5000)
+       if __name__ == '__main__':
+        port = int(os.environ.get("PORT", 5000))
+        server.run(host="0.0.0.0", port=port)
     else:
         # Режим POLLING (для локального теста)
         print("🚀 Бот запущен через Polling (локальный режим)")
