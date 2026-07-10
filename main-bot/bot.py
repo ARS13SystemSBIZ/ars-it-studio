@@ -269,6 +269,13 @@ def webhook():
         bot.process_new_updates([update])
         return "ok", 200
     return "error", 400
+@server.route('/')
+def home():
+    return "Bot is alive!", 200
+
+if __name__ == "__main__":
+    # Проверяем, есть ли переменная WEBHOOK_URL в .env
+    WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 
 if __name__ == "__main__":
     # Проверяем, есть ли переменная WEBHOOK_URL в .env
