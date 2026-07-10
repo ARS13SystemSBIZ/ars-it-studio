@@ -86,3 +86,48 @@ body {
     box-shadow: 0 6px 25px rgba(79, 195, 247, 0.7);
     transform: translateY(-3px); /* Кнопка слегка приподнимается */
 }
+.portfolio {
+    margin-top: 40px;
+}
+.portfolio h2 {
+    color: #4fc3f7;
+    text-align: center;
+}
+.projects {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.project-card {
+    background-color: #262630;
+    padding: 20px;
+    border-radius: 12px;
+    flex: 1;
+    min-width: 250px;
+    border-left: 4px solid #4fc3f7;
+}
+.project-card h3 {
+    color: #4fc3f7;
+    margin-top: 0;
+}
+.project-card p {
+    color: #b0bec5;
+    font-size: 0.9rem;
+}
+.btn-small {
+    display: inline-block;
+    background-color: #4fc3f7;
+    color: #1e1e24;
+    padding: 8px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+.btn-small:hover {
+    background-color: #1e1e24;
+    color: #4fc3f7;
+    border: 2px solid #4fc3f7;
+}
