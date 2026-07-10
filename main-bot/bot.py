@@ -1,7 +1,12 @@
+import os
 import telebot
 from telebot import types
+from flask import Flask, request
+from dotenv import load_dotenv
 
-TOKEN = '8688871079:AAFHljY3GpNFkZEmJ492qqOm_Ll1U6laFzw'
+# Читаем секретный токен из .env файла
+load_dotenv()
+TOKEN = os.getenv("BOT_TOKEN")
 YOUR_CHAT_ID = 6240010880  
 
 bot = telebot.TeleBot(TOKEN)
@@ -12,6 +17,9 @@ PRICES = {
     "level_easy": 70, "level_hard": 300,
     "addon_yes": 120, "addon_no": 0
 }
+
+# Создаём мини-веб-сервер Flask
+server = Flask(__name__)
 
 # ================= ТЕКСТОВЫЕ КОМАНДЫ БОТА =================
 @bot.message_handler(commands=['start'])
@@ -44,12 +52,12 @@ def callback_handler(call):
     if data == "main_portfolio":
         markup = types.InlineKeyboardMarkup(row_width=1)
         markup.add(
-            types.InlineKeyboardButton("☕ Кейс: Бот-Кофейня 'Coffee Express'", url="https://t.me"),
+            types.InlineKeyboardButton("☕ Кейс: Бот-Кофейня 'Coffee Express'", url="https://t.me/ars_coffee_demo_bot"),
             types.InlineKeyboardButton("🧮 Кейс: Интерактивный калькулятор", callback_data="case_calc"),
             types.InlineKeyboardButton("🖥️ Кейс: Личный сайт-визитка", callback_data="case_site"),
             types.InlineKeyboardButton("🌿 Кейс: Сайт 'Green Luxury'", callback_data="case_landscape"),
             types.InlineKeyboardButton("⭐️ Отзывы и Гарантии студии", callback_data="case_reviews"),
-            types.InlineKeyboardButton("💬 Связаться с Арсением напрямую", url="https://t.me"),
+            types.InlineKeyboardButton("💬 Связаться с Арсением напрямую", url="https://t.me/ARider13"),
             types.InlineKeyboardButton("🔙 Вернуться в главное меню", callback_data="back_to_main")
         )
         bot.edit_message_text("💼 *Портфолио IT-студии Арсения*\n\nНиже представлены наши готовые решения для автоматизации бизнеса и лидогенерации. Нажмите на любой кейс, чтобы изучить его детально или протестировать:", chat_id, call.message.message_id, parse_mode="Markdown", reply_markup=markup)
@@ -106,17 +114,25 @@ def callback_handler(call):
         reviews_text = (
             "⭐️ *Гарантии и Отзывы IT-студии Арсения*\n\n"
             "• *Безопасная сделка:* Мы дорожим репутацией и работаем строго по официальному договору. Все этапы, сроки и фиксированная стоимость прописываются юридически.\n"
-            "• *Пошаговая оплата:* Никаких 100% предоплат ”вслепую”. Оплата разбивается на комфортные этапы 50/50. Вы платите за реальный, проверенный результат.\n"
+            "• *Пошаговая оплата:* Никаких 100% предоплат 'вслепую'. Оплата разбивается на комфортные этапы 50/50. Вы платите за реальный, проверенный результат.\n"
             "• *Техподдержка 14 дней:* После запуска сайта или бота мы бесплатно сопровождаем ваш проект, исправляем любые баги и помогаем вашей команде разобраться в системе.\n\n"
             "💬 Хотите изучить отзывы наших реальных клиентов или обсудить ваш проект индивидуально? Нажмите кнопку связи с разработчиком в меню портфолио!"
         )
         bot.edit_message_text(reviews_text, chat_id, call.message.message_id, parse_mode="Markdown", reply_markup=markup)
 
-    # НАВИГАЦИОННЫЕ КНОПКИ ДЛЯ ПЕРЕХОДА ВО ВТОРУЮ ЧАСТЬ КОДА
-    elif data == "back_to_main": bot.delete_message(chat_id, call.message.message_id); start_funnel(call.message)
-    elif data == "portfolio_calc_start": user_data[chat_id]['from_portfolio'] = True; run_calculator_init(chat_id, call.message.message_id)
-    elif data == "main_calc": user_data[chat_id]['from_portfolio'] = False; run_calculator_init(chat_id, call.message.message_id)
-    elif data in ["type_site", "type_bot", "level_easy", "level_hard", "addon_yes", "addon_no", "start_order"]: handle_calculator_steps(chat_id, data, call.message.message_id)
+    # НАВИГАЦИОННЫЕ КНОПКИ
+    elif data == "back_to_main": 
+        bot.delete_message(chat_id, call.message.message_id)
+        start_funnel(call.message)
+    elif data == "portfolio_calc_start": 
+        user_data[chat_id]['from_portfolio'] = True
+        run_calculator_init(chat_id, call.message.message_id)
+    elif data == "main_calc": 
+        user_data[chat_id]['from_portfolio'] = False
+        run_calculator_init(chat_id, call.message.message_id)
+    elif data in ["type_site", "type_bot", "level_easy", "level_hard", "addon_yes", "addon_no", "start_order"]: 
+        handle_calculator_steps(chat_id, data, call.message.message_id)
+
 # ================= ВНУТРЕННИЕ СЛУЖЕБНЫЕ ФУНКЦИИ =================
 def handle_calculator_steps(chat_id, data, message_id):
     if data in ["type_site", "type_bot"]:
@@ -196,21 +212,27 @@ def run_calculator_init(chat_id, message_id):
 # ================= ПОШАГОВЫЙ СБОР КОНТАКТОВ =================
 def get_client_name(message):
     chat_id = message.chat.id
-    if message.text in ['/start']: start_funnel(message); return
+    if message.text in ['/start']: 
+        start_funnel(message)
+        return
     user_data[chat_id]['name'] = message.text
     msg = bot.send_message(chat_id, f"Приятно познакомиться, {message.text}! 👋\n\nВведите ваш номер телефона или юзернейм для связи:")
     bot.register_next_step_handler(msg, get_client_contact)
 
 def get_client_contact(message):
     chat_id = message.chat.id
-    if message.text in ['/start']: start_funnel(message); return
+    if message.text in ['/start']: 
+        start_funnel(message)
+        return
     user_data[chat_id]['contact'] = message.text
     msg = bot.send_message(chat_id, "Оставьте комментарий к заказу или ваши пожелания (если вопросов нет, отправьте дефис «-»):")
     bot.register_next_step_handler(msg, get_client_task)
 
 def get_client_task(message):
     chat_id = message.chat.id
-    if message.text in ['/start']: start_funnel(message); return
+    if message.text in ['/start']: 
+        start_funnel(message)
+        return
 
     name = user_data[chat_id]['name']
     contact = user_data[chat_id]['contact']
@@ -232,11 +254,33 @@ def get_client_task(message):
     bot.send_message(chat_id, f"Спасибо! Ваша конфигурация на сумму *${final_price}* и контакты успешно переданы. Арсений свяжется с вами в течение 15 минут! 🤝", parse_mode="Markdown")
     del user_data[chat_id]
 
-# Автоматическая настройка синего меню команд в левом нижнем углу
+# Автоматическая настройка синего меню команд
 bot.set_my_commands([
     types.BotCommand("start", "🚀 Запустить главное меню студии"),
     types.BotCommand("help", "🎯 Связаться со службой поддержки")
 ])
 
-print("Генеральный ИТ-бот студии с разделом Портфолио запущен!")
-bot.infinity_polling()
+# ================= WEBHOOK (для сервера) =================
+@server.route("/webhook", methods=["POST"])
+def webhook():
+    if request.headers.get("content-type") == "application/json":
+        json_string = request.get_data().decode("utf-8")
+        update = types.Update.de_json(json_string)
+        bot.process_new_updates([update])
+        return "ok", 200
+    return "error", 400
+
+if __name__ == "__main__":
+    # Проверяем, есть ли переменная WEBHOOK_URL в .env
+    WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+    
+    if WEBHOOK_URL:
+        # Режим WEBHOOK (для сервера)
+        print(f"🚀 Бот запущен через Webhook: {WEBHOOK_URL}")
+        bot.remove_webhook()
+        bot.set_webhook(url=WEBHOOK_URL)
+        server.run(host="0.0.0.0", port=5000)
+    else:
+        # Режим POLLING (для локального теста)
+        print("🚀 Бот запущен через Polling (локальный режим)")
+        bot.infinity_polling()

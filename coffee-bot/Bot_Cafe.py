@@ -1,7 +1,7 @@
 import telebot
 from telebot import types
 
-TOKEN = '8900991692:AAF9CQBPbNMYHwgYvurfpFuGSCv2CsNhnuI'
+TOKEN = '8900991692:AAEsQf-RgUicx-V7_iRvSieo1LsNg89sw10'
 YOUR_CHAT_ID = 6240010880  
 
 bot = telebot.TeleBot(TOKEN)
