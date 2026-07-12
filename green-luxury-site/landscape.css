@@ -454,29 +454,15 @@ body {
     font-style: italic;
     letter-spacing: 0.5px;
     line-height: 1.5;
+    white-space: nowrap;
     animation: slideReview 4s ease-in-out infinite;
 }
 
 @keyframes slideReview {
-    0% {
-        opacity: 0;
-        transform: translateX(40px);
-    }
-
-    15% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    75% {
-        opacity: 1;
-        transform: translateX(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: translateX(-40px);
-    }
+    0% { opacity: 0; transform: translateX(60px); }
+    15% { opacity: 1; transform: translateX(0); }
+    75% { opacity: 1; transform: translateX(0); }
+    100% { opacity: 0; transform: translateX(-60px); }
 }
 
 .reviews-mini:hover {
