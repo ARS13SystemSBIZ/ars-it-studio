@@ -1,37 +1,64 @@
-/* Базовые настройки для эко-стиля */
+/* ========== БАЗОВЫЕ НАСТРОЙКИ ========== */
 body {
-    background-image: url('https://images.unsplash.com/photo-1705591936362-aaaab3083cbe?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-    background-size: cover;
-    background-position: center; /* Заглушка, пока нет фоновой картинки */
-    background-attachment: fixed;
-    color: #2c3e2b;           /* Темно-зеленый глубокий цвет для текста */
-    font-family: 'Georgia', serif; /* Благородный классический шрифт */
     margin: 0;
     padding: 0;
-}   
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    color: #2c3e2b;
+    background-color: #1a1a1a;
+    overflow-x: hidden;
+}
 
-/* Главный большой баннер (Hero Section) */
+/* ========== ПАРАЛЛАКС-СЛОЙ ========== */
+.parallax-layer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 110%;
+    height: 110%;
+    pointer-events: none;
+    z-index: -1;
+    will-change: transform;
+}
+
+.parallax-back {
+    background-image: url('landscape-bg-1.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 1;
+    transition: background-image 0.5s ease;
+}
+
+/* ========== HERO ========== */
 .hero {
     color: #ffffff;
     text-align: center;
     padding: 100px 20px;
-    background: rgba(0, 0, 0, 0.3); /* Легкое затемнение, чтобы белый текст читался идеально */
+    background: rgba(0, 0, 0, 0.3);
 }
 
 .hero h1 {
     font-size: 3rem;
     margin: 0 0 15px 0;
     font-weight: normal;
+    display: inline-block;
+    border-right: 2px solid transparent;
+    padding-right: 8px;
 }
 
 .hero p {
     font-size: 1.3rem;
-    margin: 0 0 30px 0;
+    margin: 0 auto 30px auto;
     font-style: italic;
-    color: #e2ede2;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.35);
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: table;
+    max-width: 600px;
 }
 
-/* Общий контейнер для контента */
+/* ========== КОНТЕНТ ========== */
 .content-box {
     max-width: 1100px;
     margin: 60px auto;
@@ -40,78 +67,677 @@ body {
 
 .section-title {
     text-align: center;
-    font-size: 1.5rem;             /* Уменьшили размер букв до аккуратного */
-    letter-spacing: 2px;           /* Добавили дорогой премиальный отступ между буквами */
-    margin: 50px auto 30px auto;   /* Уменьшили отступы вокруг плашки */
-    font-weight: normal;
-    color: #3b533b;
-    background: rgba(255, 255, 255, 0.85); /* Сделали подложку чуть более прозрачной и легкой */
-    padding: 8px 24px;             /* Уменьшили внутренние поля, сделав рамку узкой */
-    border-radius: 4px;            /* Сделали закругления углов более строгими */
+    font-size: 1.8rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin: 50px auto 30px auto;
+    color: #ffffff;
+    background: rgba(30, 40, 30, 0.8);
+    padding: 10px 28px;
+    border-radius: 4px;
     display: table;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Сетка для карточек услуг */
 .services-grid {
     display: flex;
     gap: 30px;
     justify-content: space-between;
-    flex-wrap: wrap; /* Чтобы на телефонах карточки вставали друг под друга */
+    flex-wrap: wrap;
 }
 
-/* Премиальные белые карточки */
-.card {
-    background: rgba(44, 62, 43, 0.8); /* Премиальный глубокий зелёный с прозрачностью */
-    color: #ffffff;                    /* Весь обычный текст в карточке стал белым */
+/* ========== КАРТОЧКИ СО ШТРИХОМ ========== */
+.card-wrapper {
+    position: relative;
     flex: 1;
     min-width: 280px;
+    perspective: 800px;
+}
+
+.card-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.card-wrapper:hover .card-svg {
+    opacity: 1;
+}
+
+.card-run,
+.card-run2 {
+    animation: runCardLight 6s linear infinite;
+}
+
+@keyframes runCardLight {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: -944;
+    }
+}
+
+.card {
+    background: rgba(44, 62, 43, 0.8);
+    color: #ffffff;
     padding: 30px;
+    margin: 0;
     border-radius: 8px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2); /* Сделали тень чуть глубже для объёма */
-    border-top: 4px solid #8ebd8e;     /* Заменили полоску на нежно-зелёную, чтобы она сияла */
-    transition: transform 0.3s ease;
+    box-shadow: none;
+    border-top: 4px solid #8ebd8e;
+    transition: transform 0.2s ease-out;
+    transform-style: preserve-3d;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .card:hover {
-    transform: translateY(-5px); /* Карточка плавно приподнимается */
+    transform: translateY(-5px);
 }
 
 .card h3 {
     margin-top: 0;
     font-weight: normal;
-    color: #8ebd8e; /* Красивый светлый эко-оттенок для заголовков услуг */
+    color: #c8f0c8;
+    font-size: 1.3rem;
 }
 
 .card p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    color: #e2ede2; /* Светлый приятный цвет текста */
-}
-
-/* Благородная зеленая кнопка */
-.btn-green {
-     display: inline-block;
-    background-color: rgba(90, 125, 90, 0.25); /* Тонкий прозрачный фон */
-    border: 2px solid #8ebd8e;                 /* Стильная тонкая зелёная рамка */
+    font-size: 1.15rem;
+    line-height: 1.7;
     color: #ffffff;
-    padding: 12px 28px;                        /* Уменьшили размеры, сделав её аккуратнее */
-    text-decoration: none;
-    font-size: 1rem;
-    border-radius: 4px;
-    backdrop-filter: blur(5px);                /* Эффект дорогого матового стекла */
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== ФИЧИ ========== */
+.feature-card {
+    text-align: center;
+    border-top: 4px solid #c9a96e !important;
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.feature-card h3 {
+    color: #f0d78c !important;
+}
+
+.feature-card p {
+    color: #ffffff !important;
+    font-size: 1.15rem;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* ========== КНОПКА ========== */
+.btn-wrapper {
+    position: relative;
+    display: inline-block;
+    padding: 4px;
+    border-radius: 8px;
+    overflow: visible;
+}
+
+.btn-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    right: 4px;
+    bottom: 4px;
+    border-radius: 6px;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.btn-wrapper:hover::after {
+    opacity: 1;
+}
+
+.btn-green {
+    display: inline-block;
+    background-color: rgba(90, 125, 90, 0.25);
+    border: none;
+    color: #ffffff;
+    padding: 14px 30px;
+    font-size: 1.15rem;
+    border-radius: 6px;
+    backdrop-filter: blur(5px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-    transition: all 0.3s ease;
+    position: relative;
+    z-index: 3;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-family: 'Cormorant Garamond', 'Georgia', serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    width: 420px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
 }
 
-/* Эффект при наведении на прозрачную кнопку */
 .btn-green:hover {
-    background-color: rgba(142, 189, 142, 0.4); /* При наведении становится чуть ярче */
-    box-shadow: 0 6px 20px rgba(142, 189, 142, 0.3);
-    transform: translateY(-2px);
+    animation: shake 0.4s ease-in-out;
 }
 
-.btn-green:hover {
-    background-color: #3b533b;
-    box-shadow: 0 6px 15px rgba(59, 83, 59, 0.5);
+.neon-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+.btn-wrapper:hover .neon-svg {
+    opacity: 1;
+}
+
+.run-rect,
+.run-rect2 {
+    animation: runLight 8s linear infinite;
+}
+
+@keyframes runLight {
+    0% {
+        stroke-dashoffset: 0;
+    }
+
+    100% {
+        stroke-dashoffset: -936;
+    }
+}
+
+.btn-text {
+    font-family: inherit;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+.char {
+    position: absolute;
+    transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s ease;
+    will-change: transform, opacity;
+    pointer-events: none;
+}
+
+/* ========== ПЛАВНОЕ ПОЯВЛЕНИЕ ========== */
+.reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ========== СВЕТЛЯЧКИ ========== */
+.firefly {
+    position: fixed;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 50%;
+    filter: blur(0.5px);
+}
+
+@keyframes floatFirefly {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0.2;
+    }
+
+    25% {
+        transform: translate(30px, -50px) scale(1.2);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(-20px, -100px) scale(0.8);
+        opacity: 0.5;
+    }
+
+    75% {
+        transform: translate(-40px, -40px) scale(1.1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(10px, -80px) scale(1);
+        opacity: 0.2;
+    }
+}
+
+/* ========== ГАЛЕРЕЯ (ВЗРЫВ) ========== */
+.gallery-container {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.gallery-container.open {
+    max-height: 2000px;
+}
+
+.gallery-container .gallery-item {
+    opacity: 0;
+    transform: scale(0.3) rotate(-10deg);
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.gallery-container.open .gallery-item {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+}
+
+.gallery-container.open .gallery-item:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.gallery-container.open .gallery-item:nth-child(2) {
+    transition-delay: 0.2s;
+}
+
+.gallery-container.open .gallery-item:nth-child(3) {
+    transition-delay: 0.3s;
+}
+
+.gallery-container.open .gallery-item:nth-child(4) {
+    transition-delay: 0.4s;
+}
+
+.gallery-container.open .gallery-item:nth-child(5) {
+    transition-delay: 0.5s;
+}
+
+.gallery-container.open .gallery-item:nth-child(6) {
+    transition-delay: 0.6s;
+}
+
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+    aspect-ratio: 4 / 3;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0, 0, 0, 0.7));
+    color: #ffffff;
+    padding: 20px 16px 10px;
+    font-size: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    letter-spacing: 1px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
+}
+
+@media (max-width: 768px) {
+    .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .gallery-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ========== МИНИ-КАРУСЕЛЬ ОТЗЫВОВ ========== */
+.reviews-mini {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 100;
+    width: 260px;
+    background: rgba(15, 25, 15, 0.85);
+    backdrop-filter: blur(8px);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(197, 169, 110, 0.3);
+    overflow: hidden;
+}
+
+.review-mini-card {
+    font-size: 0.8rem;
+    color: #ffffff;
+    font-style: italic;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    animation: slideReview 4s ease-in-out infinite;
+}
+
+@keyframes slideReview {
+    0% {
+        opacity: 0;
+        transform: translateX(40px);
+    }
+
+    15% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    75% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    100% {
+        opacity: 0;
+        transform: translateX(-40px);
+    }
+}
+
+.reviews-mini:hover {
+    animation-play-state: paused;
+}
+
+/* ========== ФУТЕР ========== */
+.footer {
+    position: relative;
+    background: rgba(10, 20, 10, 0.92);
+    backdrop-filter: blur(8px);
+    padding: 50px 20px 20px;
+    margin-top: 80px;
+    border-top: 1px solid rgba(197, 169, 110, 0.2);
+}
+
+.footer-wave {
+    position: absolute;
+    top: -30px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 40'%3E%3Cpath d='M0 20 Q100 0 200 20 T400 20 T600 20 T800 20 T1000 20 T1200 20 V40 H0 Z' fill='%231a2a1a'/%3E%3C/svg%3E") repeat-x;
+    background-size: 600px 40px;
+    opacity: 0.5;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.footer-brand h3 {
+    color: #c9a96e;
+    font-size: 1.4rem;
+    margin: 0 0 4px 0;
+    font-weight: normal;
+}
+
+.footer-brand p {
+    color: #d0e0d0;
+    font-size: 0.95rem;
+    margin: 0;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+}
+
+.footer-quote {
+    color: #b0c0b0;
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 1px;
+}
+
+.footer-contacts {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.footer-contacts a {
+    color: #b0c0b0;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.footer-contacts a:hover {
+    color: #c9a96e;
+}
+
+.dot {
+    color: #556055;
+}
+
+.footer-bottom {
+    text-align: center;
+    color: #a0b0a0;
+    font-size: 0.85rem;
+    margin-top: 25px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    width: 100%;
+}
+
+/* ========== АНИМАЦИИ ========== */
+@keyframes shake {
+    0% {
+        transform: translate(0, 0);
+    }
+
+    25% {
+        transform: translate(-3px, 0);
+    }
+
+    50% {
+        transform: translate(3px, 0);
+    }
+
+    75% {
+        transform: translate(-2px, 0);
+    }
+
+    100% {
+        transform: translate(0, 0);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        border-color: #e0ffe0;
+    }
+
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* ========== ПАДАЮЩИЕ ЛИСТЬЯ ========== */
+.leaf {
+    position: fixed;
+    pointer-events: none;
+    z-index: 3;
+    border-radius: 50% 0 50% 0;
+    animation: fallLeaf linear infinite;
+}
+
+@keyframes fallLeaf {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.7;
+    }
+
+    40% {
+        transform: translateY(40vh) translateX(calc(var(--base-drift) * 0.3)) rotate(180deg);
+    }
+
+    60% {
+        transform: translateY(60vh) translateX(calc(var(--base-drift) * 0.5 + var(--wind-drift) * 0.8)) rotate(270deg);
+    }
+
+    100% {
+        transform: translateY(110vh) translateX(calc(var(--base-drift) + var(--wind-drift))) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* ========== ПЕРЕКЛЮЧАТЕЛЬ ЯЗЫКА ========== */
+.lang-switch {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 100;
+    background: rgba(15, 25, 15, 0.7);
+    backdrop-filter: blur(6px);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    border: 1px solid rgba(197, 169, 110, 0.3);
+}
+
+.lang-btn {
+    color: rgba(255, 255, 255, 0.5);
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.lang-btn:hover {
+    color: #c9a96e;
+}
+
+.lang-btn.active {
+    color: #c9a96e;
+    font-weight: 700;
+}
+
+.lang-sep {
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0 6px;
+}
+
+/* ========== ТЁМНАЯ ТЕМА ПО СИСТЕМЕ ========== */
+@media (prefers-color-scheme: dark) {
+    .card {
+        background: rgba(20, 30, 20, 0.9);
+        border-top-color: #c9a96e;
+    }
+
+    .card h3 {
+        color: #f0d78c;
+    }
+
+    .card p {
+        color: #e0e8e0;
+    }
+
+    .section-title {
+        background: rgba(15, 20, 15, 0.9);
+        color: #f0d78c;
+    }
+
+    .btn-green {
+        background: rgba(30, 40, 30, 0.5);
+        border: 1px solid #c9a96e;
+    }
+
+    .hero p {
+        background: rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* ========== МОБИЛЬНАЯ НАВИГАЦИЯ ========== */
+.mobile-nav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 200;
+    background: rgba(10, 20, 10, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(197, 169, 110, 0.3);
+    padding: 8px 0;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.mobile-nav-item {
+    color: rgba(255, 255, 255, 0.5);
+    text-decoration: none;
+    font-size: 0.7rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.3s;
+}
+
+.mobile-nav-item.active,
+.mobile-nav-item:hover {
+    color: #c9a96e;
+}
+
+@media (max-width: 768px) {
+    .mobile-nav {
+        display: flex;
+    }
+
+    body {
+        padding-bottom: 60px;
+    }
 }

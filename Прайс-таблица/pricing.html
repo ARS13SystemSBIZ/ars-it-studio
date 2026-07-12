@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Luxury | Подробный прайс-лист</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background: #f5f0e8;
+            color: #0a2a0a;
+            font-family: 'Cormorant Garamond', serif;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 50px 40px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #0d3d0d;
+            font-size: 3.2rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        h1 span {
+            display: inline-block;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+            will-change: transform, opacity;
+        }
+        .subtitle {
+            text-align: center;
+            color: #1a4a1a;
+            font-size: 1.5rem;
+            margin-bottom: 50px;
+            font-style: italic;
+            font-weight: 600;
+        }
+        .subtitle span {
+            display: inline-block;
+            transition: transform 0.4s ease-out, opacity 0.4s ease-out;
+            will-change: transform, opacity;
+        }
+        .category {
+            margin-bottom: 50px;
+        }
+        .category-title {
+            font-size: 2.2rem;
+            color: #0d3d0d;
+            border-bottom: 3px solid #c9a96e;
+            padding-bottom: 10px;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        .service {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 22px 0;
+            border-bottom: 1px solid #e0d8c8;
+            gap: 24px;
+        }
+        .service-info { flex: 1; }
+        .service-name {
+            font-size: 1.5rem;
+            color: #0a2a0a;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .service-desc {
+            font-size: 1.2rem;
+            color: #0d3d0d;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+        .service-time {
+            font-size: 1.1rem;
+            color: #1a4a1a;
+            margin-top: 8px;
+            font-weight: 700;
+        }
+        .service-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #0d3d0d;
+            white-space: nowrap;
+            text-align: right;
+            min-width: 70px;
+        }
+        .total {
+            margin-top: 50px;
+            padding-top: 24px;
+            border-top: 3px solid #c9a96e;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .total-label {
+            font-size: 2.4rem;
+            color: #0d3d0d;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+        .total-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #0a2a0a;
+        }
+        .note {
+            text-align: center;
+            color: #0d3d0d;
+            font-size: 1.2rem;
+            margin-top: 40px;
+            line-height: 1.6;
+            font-weight: 600;
+        }
+        .note a {
+            color: #0a2a0a;
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid #c9a96e;
+        }
+        .signature {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #e0d8c8;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+        }
+        .signature-text {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3rem;
+            color: #0d3d0d;
+            margin-bottom: 8px;
+            position: relative;
+            display: inline-block;
+        }
+        .signature-text span {
+            display: inline-block;
+            opacity: 0;
+            animation: writeLetter 0.3s forwards;
+        }
+        .signature-text span:nth-child(1) { animation-delay: 0.1s; }
+        .signature-text span:nth-child(2) { animation-delay: 0.2s; }
+        .signature-text span:nth-child(3) { animation-delay: 0.3s; }
+        .signature-text span:nth-child(4) { animation-delay: 0.4s; }
+        .signature-text span:nth-child(5) { animation-delay: 0.5s; }
+        .signature-text span:nth-child(6) { animation-delay: 0.6s; }
+        .signature-text span:nth-child(7) { animation-delay: 0.7s; }
+        .signature-text span:nth-child(8) { animation-delay: 0.8s; }
+        .signature-text span:nth-child(9) { animation-delay: 0.9s; }
+        .signature-text span:nth-child(10) { animation-delay: 1.0s; }
+        @keyframes writeLetter {
+            from { opacity: 0; transform: translateY(15px) rotate(-5deg); }
+            to { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+        .signature-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.2rem;
+            font-style: italic;
+            color: #1a4a1a;
+            font-weight: 600;
+        }
+        @media (max-width: 600px) {
+            .container { padding: 30px 20px; }
+            .service { flex-direction: column; gap: 8px; }
+            .service-price { text-align: left; }
+            h1 { font-size: 2.4rem; }
+            .category-title { font-size: 1.8rem; }
+            .service-name { font-size: 1.3rem; }
+            .service-desc { font-size: 1.05rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Green Luxury 🌿</h1>
+        <p class="subtitle">Подробный прайс-лист на разработку премиум-сайта</p>
+
+        <div class="category">
+            <h2 class="category-title">🌐 САЙТ (Landing Page премиум-класса)</h2>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Дизайн-концепция премиум-ландшафтного сайта</div>
+                    <div class="service-desc">Разработка визуального стиля: подбор шрифтов, цветовой палитры, настроения. Создание moodboard и утверждение концепции.</div>
+                    <div class="service-time">Срок: 3–4 дня</div>
+                </div>
+                <div class="service-price">$400</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Параллакс-фон с ручной сменой по времени суток</div>
+                    <div class="service-desc">4 фоновых изображения (утро/день/вечер/ночь). Автоматическая смена фона в зависимости от реального времени. Плавный переход.</div>
+                    <div class="service-time">Срок: 4–5 дней</div>
+                </div>
+                <div class="service-price">$250</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Адаптивная вёрстка (HTML5, CSS3, Grid)</div>
+                    <div class="service-desc">Полная вёрстка сайта. Адаптация под все устройства: ПК, планшет, смартфон. Семантический код.</div>
+                    <div class="service-time">Срок: 6–7 дней</div>
+                </div>
+                <div class="service-price">$350</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Подбор и обработка 4 фоновых фото</div>
+                    <div class="service-desc">Поиск и лицензирование премиум-фотографий ландшафтного дизайна. Цветокоррекция под стиль сайта.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$80</div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">✨ ИНТЕРАКТИВНЫЕ ЭФФЕКТЫ</h2>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Печатающийся заголовок с мигающим курсором</div>
+                    <div class="service-desc">Эффект печатной машинки для главного заголовка. Появляется при загрузке страницы, создаёт вау-эффект.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$120</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">3D-наклон карточек при наведении (Parallax tilt)</div>
+                    <div class="service-desc">Карточки услуг поворачиваются за курсором мыши, создавая эффект глубины. Как в Apple TV.</div>
+                    <div class="service-time">Срок: 3 дня</div>
+                </div>
+                <div class="service-price">$150</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Неоновые бегущие штрихи на кнопке и карточках</div>
+                    <div class="service-desc">SVG-анимация светящегося штриха, бегущего по контуру кнопки и карточек. 2 независимых штриха для бесшовности.</div>
+                    <div class="service-time">Срок: 4–5 дней</div>
+                </div>
+                <div class="service-price">$200</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Плавное появление элементов при скролле</div>
+                    <div class="service-desc">Все секции плавно проявляются снизу при прокрутке. Кастомный JavaScript без библиотек.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$100</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Взрыв букв + эффект разбитого стекла (Canvas)</div>
+                    <div class="service-desc">При клике буквы разлетаются, при повторном — заголовок рассыпается на осколки. Анимация на чистом Canvas.</div>
+                    <div class="service-time">Срок: 4–5 дней</div>
+                </div>
+                <div class="service-price">$250</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Светлячки с ИИ-поведением</div>
+                    <div class="service-desc">Парящие частицы, которые убегают от курсора. Автоматический запуск по времени суток и по клику на кнопку.</div>
+                    <div class="service-time">Срок: 5–6 дней</div>
+                </div>
+                <div class="service-price">$300</div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">🎨 КОНТЕНТ И СТРУКТУРА</h2>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Секция «Наши услуги» (3 карточки)</div>
+                    <div class="service-desc">Вёрстка и стилизация карточек с иконками и описанием услуг.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$120</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Секция «Почему мы» (3 фичи)</div>
+                    <div class="service-desc">Карточки с преимуществами компании. Иконки, заголовки, описания.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$100</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Галерея работ (6 фото)</div>
+                    <div class="service-desc">Сетка из 6 фото с эффектом увеличения при наведении и подписями.</div>
+                    <div class="service-time">Срок: 3 дня</div>
+                </div>
+                <div class="service-price">$150</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Мини-карусель отзывов с авто-сменой</div>
+                    <div class="service-desc">Компактная карусель в углу экрана. Исчезает при скролле. Автоматическая смена отзывов.</div>
+                    <div class="service-time">Срок: 3 дня</div>
+                </div>
+                <div class="service-price">$150</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Премиум-футер с SVG-волной</div>
+                    <div class="service-desc">Дизайнерский футер с логотипом, цитатой, соцсетями и декоративной волной-травой.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$100</div>
+            </div>
+        </div>
+
+        <div class="category">
+            <h2 class="category-title">⚙️ ТЕХНИЧЕСКАЯ ЧАСТЬ</h2>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Настройка GitHub Pages / деплой</div>
+                    <div class="service-desc">Размещение сайта на GitHub Pages. Настройка домена, HTTPS, автоматический деплой.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$80</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Кроссбраузерная совместимость</div>
+                    <div class="service-desc">Тестирование и исправление отображения в Chrome, Firefox, Safari, Edge.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$60</div>
+            </div>
+            <div class="service">
+                <div class="service-info">
+                    <div class="service-name">Оптимизация производительности</div>
+                    <div class="service-desc">Сжатие изображений, минификация кода, устранение блокирующих ресурсов. PageSpeed 90+.</div>
+                    <div class="service-time">Срок: 2 дня</div>
+                </div>
+                <div class="service-price">$70</div>
+            </div>
+        </div>
+
+        <div class="total">
+            <div class="total-label">💰 ИТОГО</div>
+            <div class="total-price">$3 030</div>
+        </div>
+        <p class="note">Общий срок разработки: 5–6 недель.<br>Цены указаны без учёта дальнейшей поддержки. Оплата 50/50.</p>
+        <p class="note" style="margin-top: 20px;">📞 Свяжитесь с нами: <a href="https://t.me/ars_calc_biz_bot">Telegram</a></p>
+
+        <div class="signature">
+            <div class="signature-text">
+                <span>I</span><span>T</span><span style="margin-right: 20px;"></span><span>А</span><span>р</span><span>с</span><span>е</span><span>н</span><span>и</span><span>й</span>
+            </div>
+            <div class="signature-name">
+                Арсений, создатель сайта Green Luxury
+            </div>
+        </div>
+    </div>
+
+<script>
+// ===================== ПОДПИСЬ (ПИШЕТСЯ ОДИН РАЗ И ОСТАЁТСЯ) =====================
+const signatureText = document.querySelector('.signature-text');
+const signatureName = document.querySelector('.signature-name');
+
+// Запускаем написание подписи один раз
+function writeSignatureOnce() {
+    const spans = signatureText.querySelectorAll('span');
+    spans.forEach(s => s.style.opacity = '0');
+    signatureName.style.opacity = '0';
+    
+    spans.forEach((s, i) => {
+        s.style.animation = 'none';
+        s.offsetHeight;
+        s.style.animation = `writeLetter 0.3s ${0.1 + i * 0.1}s forwards`;
+    });
+    
+    // Имя появляется ПОСЛЕ подписи (через 1.5 секунды)
+    setTimeout(() => {
+        signatureName.style.transition = 'opacity 0.8s ease';
+        signatureName.style.opacity = '1';
+    }, 1500);
+}
+
+
+// ===================== МАГИЧЕСКИЙ ПЕРГАМЕНТ =====================
+
+// НЕ фиксируем нижний блок — он скроллится вместе со страницей
+// Просто оставляем всё как есть в HTML
+
+// Подпись будет проявляться невидимым пером при скролле
+const signatureSection = document.querySelector('.signature');
+signatureSection.style.opacity = '0';
+signatureSection.style.transition = 'opacity 0.8s ease';
+
+// Все элементы КРОМЕ заголовка, подзаголовка, заголовков категорий и нижнего блока
+const allTextElements = document.querySelectorAll('.service-name, .service-desc, .service-time, .service-price, .total-label, .total-price');
+const allWordSpans = [];
+
+allTextElements.forEach(el => {
+    const text = el.textContent.trim();
+    el.textContent = '';
+    
+    const words = text.split(/(\s+)/);
+    const wordSpans = [];
+    
+    words.forEach(word => {
+        const span = document.createElement('span');
+        span.textContent = word;
+        span.style.display = 'inline-block';
+        span.style.transition = 'transform 0.5s ease-out, opacity 0.5s ease-out';
+        span.style.fontSize = 'inherit';
+        span.style.fontWeight = 'inherit';
+        span.style.fontFamily = 'inherit';
+        span.style.color = 'inherit';
+        
+        if (word.trim() === '') span.style.width = '0.3em';
+        
+        el.appendChild(span);
+        wordSpans.push(span);
+    });
+    
+    allWordSpans.push({ element: el, spans: wordSpans });
+});
+
+function updateParchmentEffect() {
+    const windowHeight = window.innerHeight;
+    const scrollY = window.scrollY;
+    const maxScroll = Math.max(document.body.scrollHeight - windowHeight, 1);
+    const scrollPercent = Math.min(scrollY / maxScroll, 1);
+    
+    const fadeOutTop = windowHeight * 0.10;
+    
+    allWordSpans.forEach(({ element, spans }) => {
+        spans.forEach((span, i) => {
+            const rect = span.getBoundingClientRect();
+            const middle = rect.top + rect.height / 2;
+            
+            if (middle < fadeOutTop) {
+                const progress = Math.min(1, 1 - middle / fadeOutTop);
+                const eased = progress * progress;
+                const y = eased * 250;
+                const x = Math.sin(i * 0.7) * eased * 200;
+                const rot = eased * (i % 2 === 0 ? 40 : -35);
+                span.style.transform = `translateY(-${y}px) translateX(${x}px) rotate(${rot}deg)`;
+                span.style.opacity = Math.max(0, 1 - eased * 3);
+            } else {
+                span.style.transform = 'translateY(0) translateX(0) rotate(0deg)';
+                span.style.opacity = 1;
+            }
+        });
+    });
+    
+    // Подпись проявляется невидимым пером при скролле до низа
+    if (scrollPercent > 0.95) {
+        signatureSection.style.opacity = Math.min(1, (scrollPercent - 0.6) * 4);
+        // Когда подпись становится видимой — запускаем написание, если ещё не запускали
+        if (signatureSection.style.opacity > 0.3 && !signatureSection.dataset.written) {
+            writeSignatureOnce();
+            signatureSection.dataset.written = 'true';
+        }
+    } else {
+        signatureSection.style.opacity = '0';
+    }
+}
+
+window.addEventListener('scroll', updateParchmentEffect);
+updateParchmentEffect();
+</script>
+</body>
+</html>

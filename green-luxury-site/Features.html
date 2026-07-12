@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Green Luxury | Возможности сайта</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="landscape.css">
+    <style>
+        .features-subtitle {
+            text-align: center;
+            color: #ffffff;
+            font-size: 1.2rem;
+            font-weight: 600;
+            font-style: italic;
+            margin-top: -20px;
+            margin-bottom: 40px;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+            background: rgba(30, 40, 30, 0.8);
+            padding: 10px 28px;
+            border-radius: 4px;
+            display: table;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .feature-card-detail {
+            background: rgba(15, 25, 15, 0.9);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 24px;
+            border: 1px solid rgba(197, 169, 110, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card-detail:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+            border-color: rgba(197, 169, 110, 0.5);
+        }
+
+        .feature-icon-detail {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .feature-card-detail h3 {
+            color: #f0d78c;
+            font-size: 1.2rem;
+            margin: 0 0 8px 0;
+            font-weight: 600;
+        }
+
+        .feature-card-detail p {
+            color: #ffffff;
+            font-size: 1rem;
+            text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 600px) {
+            .features-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="parallax-layer parallax-back"></div>
+
+    <main class="content-box" style="padding-top: 60px; padding-bottom: 60px;">
+        <h1 class="section-title">Возможности сайта ✨</h1>
+        <p class="features-subtitle">Всё, что мы реализовали для премиум-ландшафтного сайта</p>
+
+        <div class="features-list">
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🌿</div>
+                <h3>Параллакс-фон</h3>
+                <p>Фоновое изображение плавно двигается за курсором, создавая эффект глубины и живого пространства.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">⌨️</div>
+                <h3>Печатающийся заголовок</h3>
+                <p>При загрузке сайта заголовок появляется по буквам с мигающим курсором — как премиальная печатная
+                    машинка.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🎯</div>
+                <h3>3D-наклон карточек</h3>
+                <p>Карточки услуг поворачиваются за курсором мыши, создавая эффект глубины — как в Apple TV.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">✨</div>
+                <h3>Светлячки</h3>
+                <p>Парящие светящиеся частицы, которые убегают от курсора. Автоматически включаются утром, вечером и
+                    ночью.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🌙</div>
+                <h3>Смена фона по времени суток</h3>
+                <p>Сайт автоматически меняет фон в зависимости от реального времени: утро, день, вечер, ночь.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">💥</div>
+                <h3>Взрыв галереи</h3>
+                <p>При клике на заголовок «Наши работы» буквы разлетаются, и галерея появляется с эффектом. При
+                    повторном клике — заголовок рассыпается как стекло.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">📝</div>
+                <h3>Мини-карусель отзывов</h3>
+                <p>Компактная карусель с отзывами клиентов в верхнем углу экрана. Исчезает при скролле вниз.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🦶</div>
+                <h3>Премиум-футер</h3>
+                <p>Дизайнерский футер с логотипом, цитатой, соцсетями и декоративной SVG-волной.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🍃</div>
+                <h3>Падающие листья</h3>
+                <p>Маленькие листочки с эффектом ветра — иногда их поддувает в сторону, создавая атмосферу сада.</p>
+            </div>
+                        <div class="feature-card-detail">
+                <div class="feature-icon-detail">🌍</div>
+                <h3>Переключатель языков</h3>
+                <p>Сайт доступен на русском и английском языках. Все тексты переводятся на лету.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">📱</div>
+                <h3>Свайп-жесты для галереи</h3>
+                <p>На телефоне свайп влево открывает галерею, свайп вправо — закрывает. Как в мобильном приложении.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">📲</div>
+                <h3>Нижняя панель навигации</h3>
+                <p>На мобильных устройствах появляется удобная панель быстрого доступа: Главная, Услуги, Работы, Функции.</p>
+            </div>
+            <div class="feature-card-detail">
+                <div class="feature-icon-detail">🌓</div>
+                <h3>Автоматическая тёмная тема</h3>
+                <p>Сайт сам определяет, включена ли тёмная тема на устройстве, и меняет оформление на более тёмное и элегантное.</p>
+            </div>
+        </div>
+
+        <p style="text-align: center; margin-top: 50px;">
+            <a href="landscape.html" class="btn-green" style="width: auto; padding: 12px 28px; font-size: 1rem;">← На
+                главную</a>
+        </p>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-wave"></div>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <h3>Green Luxury 🌿</h3>
+                <p>Создаём сады, в которых хочется жить</p>
+            </div>
+            <div class="footer-quote">«Природа — лучший архитектор»</div>
+            <div class="footer-contacts"><a href="index.html">Главная</a><span class="dot">·</span><a
+                    href="features.html">Возможности</a><span class="dot">·</span><a
+                    href="https://t.me/ars_calc_biz_bot">Telegram</a></div>
+        </div>
+        <div class="footer-bottom">© 2026 Green Luxury. Все права защищены.</div>
+    </footer>
+
+</body>
+
+</html>
