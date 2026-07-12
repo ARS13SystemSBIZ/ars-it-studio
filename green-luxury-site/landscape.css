@@ -446,6 +446,7 @@ body {
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(197, 169, 110, 0.3);
     overflow: hidden;
+    animation: slideReview 4s ease-in-out infinite;
 }
 
 .review-mini-card {
@@ -455,14 +456,13 @@ body {
     letter-spacing: 0.5px;
     line-height: 1.5;
     white-space: nowrap;
-    animation: slideReview 4s ease-in-out infinite;
 }
 
 @keyframes slideReview {
-    0% { opacity: 0; transform: translateX(60px); }
+    0% { opacity: 0; transform: translateX(80px); }
     15% { opacity: 1; transform: translateX(0); }
     75% { opacity: 1; transform: translateX(0); }
-    100% { opacity: 0; transform: translateX(-60px); }
+    100% { opacity: 0; transform: translateX(-80px); }
 }
 
 .reviews-mini:hover {
