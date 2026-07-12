@@ -566,3 +566,11 @@ body {
     .gallery-caption { font-size: 0.8rem; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
+
+.btn-green {
+    width: 90% !important;
+    max-width: 400px;
+    font-size: 0.9rem;
+    padding: 10px 16px;
+    white-space: normal;
+}
