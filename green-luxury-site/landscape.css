@@ -176,23 +176,7 @@ body {
     display: inline-block;
     padding: 4px;
     border-radius: 8px;
-    overflow: visible;
-}
-
-.btn-wrapper::after {
-    content: '';
-    position: absolute;
-    top: 4px; left: 4px; right: 4px; bottom: 4px;
-    border-radius: 6px;
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7), 0 0 60px rgba(0, 0, 0, 0.5), 0 0 100px rgba(0, 0, 0, 0.3);
-    opacity: 0;
-    transition: opacity 0.3s;
-    z-index: 1;
-    pointer-events: none;
-}
-
-.btn-wrapper:hover::after {
-    opacity: 1;
+    overflow: hidden;
 }
 
 .btn-green {
@@ -200,7 +184,7 @@ body {
     background-color: rgba(90, 125, 90, 0.25);
     border: none;
     color: #ffffff;
-    padding: 14px 30px;
+    padding: 14px 20px;
     font-size: 1.15rem;
     border-radius: 6px;
     backdrop-filter: blur(5px);
@@ -208,18 +192,19 @@ body {
     position: relative;
     z-index: 3;
     cursor: pointer;
-    transition: background-color 0.3s ease;
     font-family: 'Cormorant Garamond', 'Georgia', serif;
     font-weight: 600;
     letter-spacing: 1px;
     width: 420px;
+    max-width: 420px;
     box-sizing: border-box;
     text-align: center;
     white-space: nowrap;
+    overflow: hidden;
 }
 
 .btn-green:hover {
-    animation: shake 0.4s ease-in-out;
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
 }
 
 .neon-svg {
@@ -230,6 +215,8 @@ body {
     z-index: 2;
     opacity: 0;
     transition: opacity 0.3s;
+    overflow: hidden;
+    border-radius: 6px;
 }
 
 .btn-wrapper:hover .neon-svg {
@@ -259,6 +246,8 @@ body {
     transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.8s ease;
     will-change: transform, opacity;
     pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 /* ========== ПЛАВНОЕ ПОЯВЛЕНИЕ ========== */
@@ -557,7 +546,7 @@ body {
 @media (max-width: 600px) {
     .hero h1 { font-size: 2rem; }
     .hero p { font-size: 1rem; max-width: 90%; }
-    .btn-green { width: 100% !important; font-size: 1rem; padding: 12px 20px; }
+    .btn-green { width: 90% !important; max-width: 350px; font-size: 0.85rem; padding: 10px 14px; white-space: normal; word-break: break-word; box-sizing: border-box; }
     .card { padding: 20px; }
     .card h3 { font-size: 1.1rem; }
     .card p { font-size: 0.95rem; }
@@ -565,12 +554,4 @@ body {
     .section-title { font-size: 1.4rem; }
     .gallery-caption { font-size: 0.8rem; }
     .gallery-grid { grid-template-columns: repeat(2, 1fr); }
-}
-
-.btn-green {
-    width: 90% !important;
-    max-width: 400px;
-    font-size: 0.9rem;
-    padding: 10px 16px;
-    white-space: normal;
 }
